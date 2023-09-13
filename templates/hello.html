@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Register</title>
+        <title>Test page</title>
     </head>
     <body>
-        Name : <input><br><br>
-        <button>Submit</button>
+        <form method="post">
+            Name: <input name="name">
+            <button type="submit">Submittaaaaa</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            
+            {% for i in messages %}
+                {{ i }} 
+            {% endfor %}
+            
+        {% endwith %}
     </body>
 </html>
