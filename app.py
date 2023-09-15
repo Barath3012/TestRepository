@@ -1,7 +1,7 @@
-from flask import Flask,render_template,request
-
+from flask import Flask,render_template,request,redirect,flash
+from Database import database
 app = Flask(__name__)
-db={'asd':'123','sed':'234','bob':'345','Hawlk':'456'}
+
 @app.route("/Register",methods=('GET','POST'))
 def default():
     if request.method =='POST':
@@ -15,12 +15,16 @@ def default():
                 db[uname]=pwd
                 print('Registered successfully')
                 print(db)
+                database('db.txt','w',username=uname,password=pwd)
         elif pwd != cpwd:
             print('Passwords do not match....enter again')
         
-    return render_template("hello.html")
+    return render_template("Register.html")
+@app.route("/")
+def home():
+    return redirect("/Login")
+
 @app.route("/Login",methods=('GET','POST'))
-@app.route("/",methods=('GET','POST'))
 def default1():
     if request.method =='POST':
         uname=request.form.get('name')
@@ -29,5 +33,6 @@ def default1():
             print('Username is taken')
         elif uname=='' or pwd=='':
             print('Empty password or username')
+
         
     return render_template("Login.html")
