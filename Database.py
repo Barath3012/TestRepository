@@ -1,11 +1,11 @@
 import os
-def database(file,mode='',data_dict={},username='',password=''):
+def database(file,mode='r',data_dict={},username='',password=''):
     if os.path.isfile(file):
         with open (file) as f:
             data=eval(f.read())
     else:
         with open (file,'w') as f:
-            f.write({})
+            f.write("{}")
             data={}
     if mode=='r':
         return data
