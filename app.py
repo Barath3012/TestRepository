@@ -22,7 +22,10 @@ def default():
         elif pwd != cpwd:
             print('Passwords do not match....enter again')
             flash('Passwords do not match....enter again')
-        
+        elif pwd=='' or cpwd=='' or uname=='':
+            print('Empty password or username')
+            flash('Empty password or username')
+
     return render_template("Register.html")
 @app.route("/")
 def home():
@@ -36,11 +39,12 @@ def default1():
         if uname in db and db.get(uname)==pwd:
             print('Logged in successfully')
             flash('Logged in successfully!!')
-        elif uname not in db or db.get(uname)!=pwd:
-            print('username or password do not match')
         elif uname=='' or pwd=='':
             print('Empty password or username')
-    
+            flash('Empty password or username')
+        elif uname not in db or db.get(uname)!=pwd:
+            print('username or password do not match')
+            flash('username or password do not match')
 
         
     return render_template("Login.html")
